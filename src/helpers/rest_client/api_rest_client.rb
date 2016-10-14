@@ -23,7 +23,6 @@ class RubyRestTeamB
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
-    response.code
 
     body = JSON.parse(response.body.to_s)
     [response.code, body]
@@ -37,7 +36,6 @@ class RubyRestTeamB
       rescue RestClient::ExceptionWithResponse => err
         response = err.response
     end
-    response.code
 
     body = JSON.parse(response.body.to_s)
     [response.code, body]
@@ -52,7 +50,6 @@ class RubyRestTeamB
       response = err.response
     end
 
-    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -65,7 +62,8 @@ class RubyRestTeamB
       response = RestClient.delete final_url, @header
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
+      body = JSON.parse(response.body.to_s)
     end
-    response.code
+    [response.code, body]
   end
 end

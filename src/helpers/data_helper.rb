@@ -16,4 +16,23 @@ class DataHelper
     json = parser.parse
     json
   end
+
+  def self.verify_type(actual_type, expected_type)
+    result = false
+    case expected_type
+      when 'Integer'
+        if actual_type.is_a? Integer
+          result = true
+        end
+      when 'String'
+        if actual_type.is_a? String
+          result = true
+        end
+      else
+        result = false
+    end
+    result
+  end
+
 end
+

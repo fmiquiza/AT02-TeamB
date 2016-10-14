@@ -19,7 +19,7 @@ class Stories
 
     def self.stories_delete(client, id_project, end_point, id_story)
       url = 'projects/' + id_project + '/' + end_point + '/' + id_story
-      code = client.delete_request(url)
-      code
+      code, body = client.delete_request(url)
+      [code, body]
     end
 end

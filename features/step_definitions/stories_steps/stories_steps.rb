@@ -25,7 +25,7 @@ And(/^I send a POST request to (.*) endpoint$/) do |end_point|
   # noinspection RubyResolve
   @code, @response = Stories.stories_post(@client, @project_id, end_point, @body)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ####GET
@@ -43,7 +43,7 @@ When(/^I send a GET request to (.*) endpoint$/) do |end_point|
   # noinspection RubyResolve
   @code, @response_get = Stories.stories_get(@client, @project_id, end_point)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ####PUT
@@ -63,7 +63,7 @@ When(/^I send a PUT request to stories with new name (.*)$/) do |modify_name|
   @code, @response = Stories.stories_put(@client, @project_id, 'stories', @story_id , @body)
 
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ####DELETE
@@ -78,8 +78,8 @@ end
 
 And(/^I send a DELETE request to (.*) endpoint$/) do |end_point|
   # noinspection RubyResolve
-  @code = Stories.stories_delete(@client, @project_id,end_point, @story_id)
+  @code, _ = Stories.stories_delete(@client, @project_id,end_point, @story_id)
 
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end

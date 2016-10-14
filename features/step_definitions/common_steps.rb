@@ -3,7 +3,7 @@ Given(/^I have set a connection to pivotal_tracker API service$/) do
   @client = RubyRestTeamB.new
 end
 
-Then(/^I expect Status code (\d+) for the SmokeTest$/) do |http_code|
+Then(/^I expect Status code (\d+) for the Test$/) do |http_code|
   # noinspection RubyResolve
   expect(@code.to_s).to eql(http_code.to_s)
 end

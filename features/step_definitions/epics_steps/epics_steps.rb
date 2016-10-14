@@ -26,7 +26,7 @@ And(/^expect (.*) of epic will be (.*)$/) do |attribute, name|
   expect(name).to eql(actual_name)
 
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ######################################DELETE######################
@@ -45,7 +45,7 @@ When (/I sending a DELETE request to (.*) endpoint/) do |endpoint|
   # noinspection RubyResolve
   @code = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ##################################GET##############################
@@ -63,7 +63,7 @@ When (/^I sending a GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epics_get(@client, endpoint, @project_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 #################################PUT##############################
@@ -81,7 +81,7 @@ When(/^I sending a PUT request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epics_put(@client, endpoint, @project_id, @epic_id, @body2)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ###########################GET(specific)############################
@@ -98,5 +98,5 @@ When(/^I sending GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epic_get(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
  end
