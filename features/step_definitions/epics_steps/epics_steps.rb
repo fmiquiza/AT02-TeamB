@@ -28,7 +28,7 @@ And(/^expect (.*) of epic will be (.*)$/) do |attribute, name|
   expect(name).to eql(actual_name)
 
   # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 ######################################DELETE######################
@@ -50,7 +50,7 @@ When (/I sending a DELETE request to (.*) endpoint/) do |endpoint|
   end
   @code, @body = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 ##################################GET##############################
@@ -68,7 +68,7 @@ When (/^I sending a GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epics_get(@client, endpoint, @project_id)
   # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 #################################PUT##############################
@@ -86,7 +86,7 @@ When(/^I sending a PUT request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epics_put(@client, endpoint, @project_id, @epic_id, @body_new)
   # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 ###########################GET(specific)############################
@@ -103,7 +103,7 @@ When(/^I sending GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epic_get(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 
@@ -113,7 +113,7 @@ Then(/^expect (.*) should be (.*)/) do |attribute, value|
   actual_value = @response.fetch(attribute)
   expect(value).to eql(actual_value)
 # noinspection RubyResolve
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
 end
 
 And(/^(.*) should be an (.*)$/) do |attrib, type|
@@ -171,12 +171,12 @@ Then(/^I want to create and epic with (\d+) characters in his (.*)/) do |number_
 end
 
 Then(/^expect (.*) should has (\d+) characters$/) do |attrib, number_of_expected_characters|
-  _, _ = @client.delete_request('projects/' + @project_id)
+  @client.delete_request('projects/' + @project_id)
   @actual_number_of_characters = @response.fetch(attrib).length
   expect(@actual_number_of_characters).to eql(number_of_expected_characters.to_i)
 end
 
 And(/^The epic shouldn't be created$/) do
   expect(@response['code']).to eql('invalid_parameter')
- _, _ = @client.delete_request('projects/' + @project_id)
+ @client.delete_request('projects/' + @project_id)
 end
