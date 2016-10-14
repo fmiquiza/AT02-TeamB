@@ -176,6 +176,7 @@ Then(/^expect (.*) should has (\d+) characters$/) do |attrib, number_of_expected
   expect(@actual_number_of_characters).to eql(number_of_expected_characters.to_i)
 end
 
-
-
-
+And(/^The epic shouldn't be created$/) do
+  expect(@response['code']).to eql('invalid_parameter')
+ _, _ = @client.delete_request('projects/' + @project_id)
+end

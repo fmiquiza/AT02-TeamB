@@ -12,6 +12,7 @@ Scenario: Epic create
   And expect kind should be epic
   And id should be an Integer
 
+@functional @post @nameEpic
 Scenario: Name of epic
   Given I have set a connection to pivotal_tracker API service
   And I have a ProjectEpicTest project
@@ -19,7 +20,6 @@ Scenario: Name of epic
   When Sending a POST request to epics endpoint to create the epic
   Then I expect Status code 200 for the Test
   Then expect name should has 255 characters
-
 
 
   @functional @delete @epic
