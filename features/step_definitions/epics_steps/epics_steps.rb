@@ -52,7 +52,7 @@ end
 
 ##################################GET##############################
 
-Then (/^I want to get all epics in the project$/)do | |
+Then (/^I want to get all epics in this project$/)do
   @body = {:name => 'EpicTest'}
   @body2 = {:name => 'EpicTest2'}
   # noinspection RubyResolve
@@ -119,4 +119,40 @@ require_relative '../../../src/helpers/data_helper'
 end
 ####################Functional####DELETE##############################
 
+####################Functional####GET################################
+And(/^I have created two (.*) (.*) and (.*)$/) do |endpoint, epic_one, epic_two|
+  @body_epic_one = {:name => epic_one}
+  @body_epic_two = {:name => epic_two}
+  _, @response_epic_one = @epic.epics_post(@client, endpoint, @project_id, @body_epic_one)
+  _, @response_epic_two = @epic.epics_post(@client, endpoint, @project_id, @body_epic_two)
+end
+
+And(/^I want to get (.*) in the project$/) do |endpoint|
+  @code, @response = @epic.epics_get(@client, endpoint, @project_id)
+end
+
+Given(/^I should have (\d+) epics$/) do |expected_lenght|
+  expect(expected_lenght.to_i).to eql(@response.length)
+end
+
+Then(/^one this should have (.*) (.*)$/) do |value, attrib|
+  result = false
+  @response.each { |resp|
+  if resp.fetch(attrib) == value
+     result = true
+  end
+  }
+  expect(result).to be true
+end
+
+And(/^the other (.*) (.*)$/) do |value, attrib|
+  result = false
+  @response.each { |resp|
+    if resp.fetch(attrib) == value
+      result = true
+    end
+  }
+  expect(result).to be true
+  _, _ = @client.delete_request('projects/' + @project_id)
+end
 

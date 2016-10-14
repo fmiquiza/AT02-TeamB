@@ -22,7 +22,7 @@ Feature: Epic Smoke Tests
      Scenario: Epics get
      Given I have set a connection to pivotal_tracker API service
      And I have a ProjectEpicTest project
-     Then I want to get all epics in the project
+     Then I want to get all epics in this project
      When I sending a GET request to epics endpoint
      Then I expect Status code 200 for the SmokeTest
 
