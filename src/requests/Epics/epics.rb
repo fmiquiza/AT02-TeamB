@@ -7,9 +7,9 @@ class Epics
 
   def epics_delete(client, endpoint, project_id, epic_id)
     url =  'projects/' + project_id + '/' + endpoint + '/' + epic_id
-    code = client.delete_request(url)
+    code, body = client.delete_request(url)
     # noinspection RubyUnnecessaryReturnValue
-    code
+    [code, body]
   end
 
   def epics_get(client, endpoint, project_id)

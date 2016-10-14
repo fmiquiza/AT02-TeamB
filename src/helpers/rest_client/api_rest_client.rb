@@ -5,7 +5,7 @@ require_relative '../config/configuration'
 require_relative '../data_helper'
 
 # noinspection ALL
-class RubyRestTeamB
+class ApiRestClient
   def initialize
     @config = Configuration.new
     @base_url = @config.get('url')
@@ -21,7 +21,6 @@ class RubyRestTeamB
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
-    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -34,7 +33,6 @@ class RubyRestTeamB
       rescue RestClient::ExceptionWithResponse => err
         response = err.response
     end
-    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -47,7 +45,6 @@ class RubyRestTeamB
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
-    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -60,7 +57,8 @@ class RubyRestTeamB
       response = RestClient.delete final_url, @header
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
+      body = JSON.parse(response.body.to_s)
     end
-    response.code
+    [response.code, body]
   end
 end

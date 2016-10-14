@@ -1,5 +1,5 @@
 @api_test
-Feature: Epic Tests
+Feature: Epic Smoke Tests
 
   @smoke @post @epic
   Scenario: Epic create
@@ -41,3 +41,4 @@ Feature: Epic Tests
     Then I want to get an epic with the name EpicTest
     When I sending GET request to epics endpoint
     Then I expect Status code 200 for the SmokeTest
+

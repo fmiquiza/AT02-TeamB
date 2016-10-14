@@ -1,3 +1,5 @@
+##############Common#####Epics###########################
+
 And(/^I have a (.*) project$/) do |project_name|
   require_relative '../../../src/requests/Epics/epics'
   @body = {:name => project_name}
@@ -7,7 +9,7 @@ And(/^I have a (.*) project$/) do |project_name|
   @project_id =  (@response_project['id']).to_s
 end
 
-###############################POST######################
+###############Smoke#########POST############################
 
 Then(/^I want to create an epic with the (.*) (.*) in the project$/) do |attribute, name_epic|
   require_relative '../../../src/requests/Epics/epics'
@@ -26,7 +28,7 @@ And(/^expect (.*) of epic will be (.*)$/) do |attribute, name|
   expect(name).to eql(actual_name)
 
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ######################################DELETE######################
@@ -43,9 +45,9 @@ end
 
 When (/I sending a DELETE request to (.*) endpoint/) do |endpoint|
   # noinspection RubyResolve
-  @code = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
+  @code, _ = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ##################################GET##############################
@@ -63,25 +65,25 @@ When (/^I sending a GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epics_get(@client, endpoint, @project_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 #################################PUT##############################
 
 
 Then(/^I want to modify an epic with the (.*) (.*) to (.*)$/) do |attrib, actual_name, new_name|
-  @body = {attrib => actual_name}
-  @body2 = {attrib => new_name}
+  @body_actual = {attrib => actual_name}
+  @body_new = {attrib => new_name}
   # noinspection RubyResolve
-  _, @response_epic = @epic.epics_post(@client, 'epics', @project_id, @body)
+  _, @response_epic = @epic.epics_post(@client, 'epics', @project_id, @body_actual)
   @epic_id = @response_epic['id'].to_s
 end
 
 When(/^I sending a PUT request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
-  @code, @response = @epic.epics_put(@client, endpoint, @project_id, @epic_id, @body2)
+  @code, @response = @epic.epics_put(@client, endpoint, @project_id, @epic_id, @body_new)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
+  _, _ = @client.delete_request('projects/' + @project_id)
 end
 
 ###########################GET(specific)############################
@@ -98,5 +100,23 @@ When(/^I sending GET request to (.*) endpoint$/) do |endpoint|
   # noinspection RubyResolve
   @code, @response = @epic.epic_get(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
-  @client.delete_request('projects/' + @project_id)
- end
+  _, _ = @client.delete_request('projects/' + @project_id)
+end
+
+
+####################Functional#####POST##############################
+
+Then(/^expect (.*) should be (.*)/) do |attribute, value|
+  actual_value = @response.fetch(attribute)
+  expect(value).to eql(actual_value)
+# noinspection RubyResolve
+  _, _ = @client.delete_request('projects/' + @project_id)
+end
+
+And(/^(.*) should be an (.*)$/) do |attrib, type|
+require_relative '../../../src/helpers/data_helper'
+ expect(DataHelper.verify_type(@response[attrib], type)).to be true
+end
+####################Functional####DELETE##############################
+
+
