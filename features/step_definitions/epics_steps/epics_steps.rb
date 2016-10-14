@@ -136,8 +136,8 @@ And(/^I want to get (.*) in the project$/) do |endpoint|
   @code, @response = @epic.epics_get(@client, endpoint, @project_id)
 end
 
-Given(/^I should have (\d+) epics$/) do |expected_lenght|
-  expect(expected_lenght.to_i).to eql(@response.length)
+Given(/^I should have (\d+) epics$/) do |expected_length|
+  expect(expected_length.to_i).to eql(@response.length)
 end
 
 Then(/^one this should have (.*) (.*)$/) do |value, attrib|
