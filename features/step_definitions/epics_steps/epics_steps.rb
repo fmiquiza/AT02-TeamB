@@ -45,7 +45,10 @@ end
 
 When (/I sending a DELETE request to (.*) endpoint/) do |endpoint|
   # noinspection RubyResolve
-  @code, _ = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
+  if @epic_id == nil
+    @epic_id = ''
+  end
+  @code, @body = @epic.epics_delete(@client, endpoint, @project_id, @epic_id)
   # noinspection RubyResolve
   _, _ = @client.delete_request('projects/' + @project_id)
 end
@@ -118,7 +121,9 @@ require_relative '../../../src/helpers/data_helper'
  expect(DataHelper.verify_type(@response[attrib], type)).to be true
 end
 ####################Functional####DELETE##############################
+Then(/^I want to delete an epic without an epic$/) do
 
+end
 ####################Functional####GET################################
 And(/^I have created two (.*) (.*) and (.*)$/) do |endpoint, epic_one, epic_two|
   @body_epic_one = {:name => epic_one}
@@ -155,4 +160,22 @@ And(/^the other (.*) (.*)$/) do |value, attrib|
   expect(result).to be true
   _, _ = @client.delete_request('projects/' + @project_id)
 end
+
+#################################Functional###POST## Name of epic
+
+Then(/^I want to create and epic with (\d+) characters in his (.*)/) do |number_of_characters, attrib|
+  require_relative '../../../src/requests/Epics/epics'
+  @characters = number_of_characters.to_i
+  @body = {attrib => 'e' * @characters}
+  @epic = Epics.new
+end
+
+Then(/^expect (.*) should has (\d+) characters$/) do |attrib, number_of_expected_characters|
+  _, _ = @client.delete_request('projects/' + @project_id)
+  @actual_number_of_characters = @response.fetch(attrib).length
+  expect(@actual_number_of_characters).to eql(number_of_expected_characters.to_i)
+end
+
+
+
 
