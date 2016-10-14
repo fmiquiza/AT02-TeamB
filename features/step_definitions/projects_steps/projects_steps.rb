@@ -28,7 +28,7 @@ When(/^Sending a GET BY ID request endpoint$/) do
 end
 
 When(/^Sending a DELETE request endpoint$/) do
-  @code = Projects.project_delete(@client, @body['id'])
+  @code, _ = Projects.project_delete(@client, @body['id'])
 end
 
 When(/^I sent a post request with (\d+) characters$/) do |number_of_characters|
