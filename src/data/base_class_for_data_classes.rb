@@ -20,6 +20,7 @@ class BaseClassForDataClasses
     super(*vars)
   end
 
+  # noinspection RubyResolve
   def self.attributes
     @attributes
   end

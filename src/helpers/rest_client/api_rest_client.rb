@@ -1,4 +1,5 @@
 # noinspection RubyResolve
+
 require 'rest-client'
 require 'json'
 require_relative '../config/configuration'
@@ -21,6 +22,7 @@ class ApiRestClient
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
+    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -33,6 +35,7 @@ class ApiRestClient
       rescue RestClient::ExceptionWithResponse => err
         response = err.response
     end
+    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end
@@ -45,6 +48,7 @@ class ApiRestClient
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
+    response.code
     body = JSON.parse(response.body.to_s)
     [response.code, body]
   end

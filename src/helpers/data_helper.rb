@@ -9,6 +9,8 @@ class DataHelper
     end
     rehash
   end
+
+  # noinspection RubyArgCount
   def self.parse_json(string)
     parser = JSON::Ext::Parser.new(string)
     json = parser.parse
@@ -28,9 +30,9 @@ class DataHelper
         end
       else
         result = false
-    end  
+    end
     result
-
   end
 
 end
+
