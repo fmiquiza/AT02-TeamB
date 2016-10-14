@@ -28,6 +28,7 @@ class RubyRestTeamB
 
   def post_request(url, json)
     response = nil
+
     begin
       final_url = @base_url + url
       response = RestClient.post final_url, json, @header
@@ -36,6 +37,7 @@ class RubyRestTeamB
     end
     response.code
     body = JSON.parse(response.body.to_s)
+
     [response.code, body]
   end
 
@@ -47,8 +49,8 @@ class RubyRestTeamB
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
-    response.code
     body = JSON.parse(response.body.to_s)
+
     [response.code, body]
   end
 
@@ -61,6 +63,7 @@ class RubyRestTeamB
     rescue RestClient::ExceptionWithResponse => err
       response = err.response
     end
+
     response.code
   end
 end

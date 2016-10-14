@@ -8,3 +8,5 @@ gem 'cucumber'
 
 # Rspec gem
 gem 'rspec'
+
+gem 'rest-client'
