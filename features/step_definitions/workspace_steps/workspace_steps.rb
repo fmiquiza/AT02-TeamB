@@ -10,9 +10,9 @@ But(/^I have a (.*) workspace$/) do |workspace_name|
 end
 
 # ******************POST steps BEGIN *****************
-And(/^I want to create a workspace with the (.*) (.*)$/) do |workspace_attributeute, name_workspace|
+And(/^I want to create a workspace with the (.*) (.*)$/) do |workspace_attributable, name_workspace|
   require_relative '../../../src/requests/Workspaces/workspaces'
-  @body = {workspace_attributeute => name_workspace}
+  @body = {workspace_attributable => name_workspace}
   @workspace = Workspaces.new
 end
 
@@ -22,8 +22,8 @@ When(/^Sending a POST requests to the (.*) endpoint$/) do |endpoint|
   @id_workspace = @response['id']
 end
 
-And(/^I expect (.*) would be (.*)$/) do |workspace_attributeute, name|
-  actual_name = @response.fetch(workspace_attributeute)
+And(/^I expect (.*) would be (.*)$/) do |workspace_attributable, name|
+  actual_name = @response.fetch(workspace_attributable)
   expect(name).to eql(actual_name)
 
 
@@ -67,7 +67,7 @@ Then(/^I want to modify my created workspace with the (.*) (.*) to (.*)$/) do |w
   @name_before_changes = {workspace_attribute => last_workspace_name}
   @name_after_changes = {workspace_attribute => modified_workspace_name}
   # noinspection RubyResolve
-  @json={:name=>"puts02"}
+  @json={:name=> 'puts02'}
    _, @response_workspace = Workspaces.workspaces_post(@client, @json)
 
   @id_workspace = @response_workspace['id'].to_s

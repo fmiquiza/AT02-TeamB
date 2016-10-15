@@ -32,7 +32,7 @@ Feature: Project Smoke Tests
     Then I expect Status code 200 for the Test
     Then The project is deleted
 
-  @smoke @deleteproject
+  @smoke @deleteProject
   Scenario: Project Delete
     Given I have set a connection to pivotal_tracker API service
     And I have a project
