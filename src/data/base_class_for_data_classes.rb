@@ -20,6 +20,7 @@ attr_accessor :attributes
     super(*vars)
   end
 
+  # noinspection RubyResolve
   def self.attributes
     @attributes
   end
